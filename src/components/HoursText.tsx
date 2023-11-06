@@ -81,6 +81,8 @@ const HoursText = ({ document }: any) => {
     return h + ":" + m;
   };
   const res = getDayName(hours, timezone);
+  console.log(JSON.stringify(res));
+
   return (
     <div className="hero mt-4 w-full">
       <div className="hero-row flex">

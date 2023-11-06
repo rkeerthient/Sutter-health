@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import SearchResults from "../pages/SearchResults";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
+import ProfessionalCard from "../components/Cards/ProfessionalCard";
+import { CardComponent, StandardCard } from "@yext/search-ui-react";
 
 export const config: TemplateConfig = {
   name: "search",
@@ -46,9 +48,18 @@ export const getHeadConfig: GetHeadConfig<
 
 const Search: Template<TemplateRenderProps> = ({ document }) => {
   const [verticalKey, setVerticalKey] = useState("");
+  const [cardType, setCardType] = useState<any>();
   const handleClick = (id: string) => {
+    id === "healthcare_professionals"
+      ? setCardType("ProfessionalCard")
+      : id === "healthcare_facilities"
+      ? setCardType("FacilityCard")
+      : id === "services"
+      ? setCardType("ServicesCard")
+      : StandardCard;
     setVerticalKey(id);
   };
+
   return (
     <>
       <PageLayout>
@@ -81,6 +92,7 @@ const Search: Template<TemplateRenderProps> = ({ document }) => {
               />
             </div>
             <SearchResults
+              cardType={cardType}
               vertKey={verticalKey}
               isUniversal={false}
             ></SearchResults>
