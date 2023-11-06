@@ -61,7 +61,6 @@
 }
 
 .slick-list {
-  width: 80%;
   margin: 0 auto !important;
 }
 
@@ -93,4 +92,7 @@
 }
 .slick-slider .slick-slide {
   padding: 0 15px;
+}
+.slick-track {
+  margin-left: unset !important;
 }

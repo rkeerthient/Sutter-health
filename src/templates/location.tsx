@@ -19,15 +19,14 @@ import {
   TemplateRenderProps,
 } from "@yext/pages";
 import * as React from "react";
-import Banner from "../components/banner";
-import Contact from "../components/contact";
-import Cta from "../components/cta";
 import Hours from "../components/hours";
-import List from "../components/list";
 import PageLayout from "../components/page-layout";
-import StaticMap from "../components/static-map";
 import "../index.css";
-
+import { Image } from "@yext/pages/components";
+import Address from "../components/Address";
+import FormatPhone from "../components/FormatPhone";
+import { LexicalRichText } from "@yext/react-components";
+import Carousel from "../components/Carousel";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -48,10 +47,21 @@ export const config: TemplateConfig = {
       "slug",
       "geocodedCoordinate",
       "services",
+      "photoGallery",
+      "frequentlyAskedQuestions",
+      "c_cRichTextDesc",
+      "c_disabilityServices",
+      "c_servicesfacility.name",
+      "c_servicesfacility.slug",
+      "c_servicesfacility.primaryPhoto",
+      "c_docToLoc.name",
+      "c_docToLoc.slug",
+      "c_docToLoc.headshot",
+      "c_docToLoc.c_speciality",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
-      entityTypes: ["location"],
+      entityTypes: ["healthcareFacility"],
     },
     // The entity language profiles that documents will be generated for.
     localization: {
@@ -135,45 +145,127 @@ const Location: Template<TemplateRenderProps> = ({
     mainPhone,
     geocodedCoordinate,
     services,
+    photoGallery,
+    frequentlyAskedQuestions,
+    c_cRichTextDesc,
+    c_disabilityServices,
+    c_servicesfacility,
+    c_docToLoc,
   } = document;
 
   return (
-    <>
-      <PageLayout>
-        <Banner name={name} address={address} openTime={openTime}>
-          <div className="bg-white h-40 w-1/5 flex items-center justify-center text-center flex-col space-y-4 rounded-lg">
-            <div className="text-black text-base">Visit Us Today!</div>
-            <Cta
-              buttonText="Get Directions"
-              url="http://google.com"
-              style="primary-cta"
-            />
-          </div>
-        </Banner>
+    <PageLayout>
+      <div className="space-y-8">
         <div className="centered-container">
-          <div className="section">
-            <div className="grid grid-cols-3 gap-x-10 gap-y-10">
-              <div className="bg-gray-100 p-5 space-y-12">
-                <Contact address={address} phone={mainPhone}></Contact>
-                {services && <List list={services}></List>}
-              </div>
-              <div className="col-span-2 pt-5 space-y-10">
-                <div>
-                  {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
+          <div className="flex flex-col gap-8">
+            <h1 className="text-4xl font-bold">{name}</h1>
+            <div className="grid grid-cols-2 justify-between items-start">
+              <div className="grid grid-cols-2">
+                {photoGallery && <Image image={photoGallery[0]}></Image>}
+                <div className="flex flex-col gap-5">
+                  <Address address={address}></Address>
+                  <div className="text-[#008080] hover:cursor-pointer">
+                    <FormatPhone phoneNumber={mainPhone}></FormatPhone>
+                  </div>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${geocodedCoordinate.latitude},${geocodedCoordinate.longitude}`}
+                    className="px-4 w-fit py-2 bg-[#008080] text-white font-bold text-sm uppercase  rounded-md"
+                  >
+                    Map & Directions
+                  </a>
                 </div>
-                {geocodedCoordinate && (
-                  <StaticMap
-                    latitude={geocodedCoordinate.latitude}
-                    longitude={geocodedCoordinate.longitude}
-                  ></StaticMap>
-                )}
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <div className="text-gray-500 font-bold border-b-2">
+                    NETWORK AFFILIATION
+                  </div>
+                  <div>
+                    This location is part of Sutter Health's California Pacific
+                    Medical Center.
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <div className="text-gray-500 font-bold border-b-2">
+                    HOURS:
+                  </div>
+                  <div>{hours && <Hours title={""} hours={hours} />}</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </PageLayout>
-    </>
+        <div className="bg-[#008080] py-5 ">
+          <div className="text-3xl text-white centered-container">
+            Please call (415) 641-6996 to schedule an appointment.
+          </div>
+        </div>
+        <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
+          <div className="font-bold w-1/5 text-lg">
+            About Alta Bates High Risk Infant Follow Up Clinic
+          </div>
+          <div className="flex-1">
+            <LexicalRichText
+              serializedAST={JSON.stringify(c_cRichTextDesc.json)}
+            />
+          </div>
+        </div>
+        {frequentlyAskedQuestions && (
+          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">
+              Frequently Asked Questions
+            </div>
+            <div className="flex-1 flex flex-col gap-4">
+              {frequentlyAskedQuestions.map((item, index) => (
+                <div key={index}>
+                  <div className="font-normal text-xl">{item.question}</div>
+                  <div>{item.answer}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {c_disabilityServices && (
+          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">Disability Services</div>
+            <div className="flex-1">
+              <LexicalRichText
+                serializedAST={JSON.stringify(c_disabilityServices.json)}
+              />
+            </div>
+          </div>
+        )}
+
+        {c_servicesfacility && (
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">Services Offered</div>
+            <div className="w-4/5">
+              <Carousel
+                data={c_servicesfacility}
+                slidesToShow={4}
+                type="service"
+              />
+            </div>
+          </div>
+        )}
+        {c_docToLoc && (
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">Doctors</div>
+            <div className="w-4/5">
+              <Carousel data={c_docToLoc} slidesToShow={3} type="doctor" />
+            </div>
+          </div>
+        )}
+      </div>
+    </PageLayout>
   );
 };
 
 export default Location;
+// <a
+//   key={index}
+//   href={item.slug}
+//   className="text-[#008080] font-bold border-t-2 border-spacing-4"
+// >
+//   {item.name}
+// </a>
