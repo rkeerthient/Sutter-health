@@ -28,6 +28,7 @@ import MapPin from "../components/MapPin";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { LngLat, LngLatBounds } from "mapbox-gl";
 import NavBar from "../components/NavBar";
+import Services from "../components/Cards/Services";
 
 const SearchResults = () => {
   const [showSearchAreaButton, setShowSearchAreaButton] = useState(false);
@@ -172,8 +173,9 @@ const SearchResults = () => {
                         SectionComponent: StandardSection,
                       },
                       services: {
-                        CardComponent: StandardCard,
-                        SectionComponent: StandardSection,
+                        label: "Services",
+                        CardComponent: Services,
+                        SectionComponent: GridSection,
                       },
                     }}
                   />
@@ -233,9 +235,11 @@ const SearchResults = () => {
                 <>
                   {!isLoading && (
                     <div className="flex mt-4">
-                      <div className="w-56 shrink-0 mr-5">
-                        <StandardFacets />
-                      </div>
+                      {verticalKey !== "services" && (
+                        <div className="w-56 shrink-0 mr-5">
+                          <StandardFacets />
+                        </div>
+                      )}
                       <div className="flex-grow">
                         <div className="flex items-baseline">
                           <ResultsCount />
@@ -244,11 +248,15 @@ const SearchResults = () => {
                         <VerticalResults
                           CardComponent={
                             verticalKey === "services"
-                              ? StandardCard
+                              ? Services
                               : ProfessionalCard
                           }
                           customCssClasses={{
-                            verticalResultsContainer: "flex flex-col gap-4 ",
+                            verticalResultsContainer: `${
+                              verticalKey === "services"
+                                ? "grid grid-cols-4 gap-4"
+                                : "flex flex-col gap-4"
+                            }`,
                           }}
                         />
                         <Pagination />
