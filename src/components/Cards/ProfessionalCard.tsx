@@ -14,6 +14,9 @@ import HoursText from "../HoursText";
 
 const ProfessionalCard = ({ result }: CardProps<HealthcareProfessional>) => {
   const { name } = result;
+  const getStatus = (val: string) => {
+    val === "Closed perm" ? "" : "";
+  };
   const {
     headshot,
     slug,
@@ -66,7 +69,7 @@ const ProfessionalCard = ({ result }: CardProps<HealthcareProfessional>) => {
         </div>
       </div>
       <div className="m-auto flex flex-col gap-6">
-        {hours && <HoursText document={result.rawData} />}
+        {hours && <HoursText document={result.rawData} status={getStatus} />}
         <a
           href="#"
           className="w-full uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border"

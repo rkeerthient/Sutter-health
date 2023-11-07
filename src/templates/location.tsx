@@ -143,7 +143,6 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     c_servicesfacility,
     c_docToLoc,
   } = document;
-  console.log(c_cRichTextDesc);
 
   return (
     <PageLayout>

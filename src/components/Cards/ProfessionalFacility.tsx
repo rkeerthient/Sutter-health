@@ -13,7 +13,6 @@ const ProfessionalFacility = ({ result }: CardProps<HealthcareFacility>) => {
   const { name } = result;
   const { photoGallery, address, mainPhone, hours, slug, c_servicesfacility } =
     result.rawData;
-  console.log(c_servicesfacility);
 
   const [showBooking, setShowBooking] = useState(false);
   const [showHours, setShowHours] = useState(true);

@@ -32,7 +32,7 @@ const DoctorFilterSearch = ({ onSearchClick }: DoctorFilterSearchProps) => {
     let language = filters.filter(
       (item) => item.filter.fieldId === "languages"
     )[0].displayName;
-    window.location.href = `/search.html?vertical=healthcare_professionals&query=+Providers+near +${location.replaceAll(
+    window.location.href = `/search.html?vertical=healthcare_professionals&query=Providers+near+${location.replaceAll(
       " ",
       "+"
     )}+specialized+in+${service.replaceAll(
