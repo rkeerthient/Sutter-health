@@ -17,50 +17,29 @@ interface DoctorFilterSearchProps {
 }
 
 // TODO: Add Icons next search queries
-const DoctorFilterSearch = ({
-  onSearchClick,
-  navigateOnSearch,
-}: DoctorFilterSearchProps) => {
-  const [service, setService] = useState("");
-  const [locationDisplayName, setLocationDisplayName] = useState("");
-  const [language, setLanguage] = useState("");
+const DoctorFilterSearch = ({ onSearchClick }: DoctorFilterSearchProps) => {
   const searchActions = useSearchActions();
-  const staticFilters = useSearchState((state) => state.filters.static);
   searchActions.setVertical("healthcare_professionals");
 
-  // const handleSelect = (params: OnSelectParams) => {
-  //   console.log("inn");
-
-  //   if (navigateOnSearch) {
-  //     const urlParams = new URLSearchParams({});
-  //     urlParams.set(`sf_${params.newFilter.fieldId}`, params.newDisplayName);
-  //     window.location.href = `/search?${urlParams.toString()}`;
-  //   } else {
-  //     staticFilters?.filter((sf) => console.log(sf.filter.fieldId)) ?? [];
-
-  //     const filteredFilters =
-  //       staticFilters?.filter(
-  //         (sf) => sf.filter.fieldId !== params.newFilter.fieldId
-  //       ) ?? [];
-  //     console.log(JSON.stringify(filteredFilters));
-
-  //     searchActions.setStaticFilters([
-  //       ...filteredFilters,
-  //       {
-  //         filter: params.newFilter,
-  //         selected: true,
-  //         displayName: params.newDisplayName,
-  //       },
-  //     ]);
-
-  //     searchActions.executeVerticalQuery();
-  //   }
-  // };
-
-  // const handleSearchClick = () => {
-  //   onSearchClick && onSearchClick();
-  //   searchActions.executeVerticalQuery();
-  // };
+  const handleSearchClick = () => {
+    let filters = searchActions.state.filters.static;
+    let service = filters.filter(
+      (item) => item.filter.fieldId === "c_speciality"
+    )[0].displayName;
+    let location = filters.filter(
+      (item) => item.filter.fieldId === "builtin.location"
+    )[0].displayName;
+    let language = filters.filter(
+      (item) => item.filter.fieldId === "languages"
+    )[0].displayName;
+    window.location.href = `/search.html?vertical=healthcare_professionals&query=+Providers+near +${location.replaceAll(
+      " ",
+      "+"
+    )}+specialized+in+${service.replaceAll(
+      " ",
+      "+"
+    )}+who+speak+${language.replaceAll(" ", "+")}`;
+  };
 
   return (
     <div className="hidden z-0 justify-center bg-stone-300 lg:flex text-left ">
@@ -81,8 +60,19 @@ const DoctorFilterSearch = ({
               nonHighlighted: "text-sm",
               sectionLabel: "text-lg",
             }}
-            onSelect={(params) => {
-              setService(params.newDisplayName);
+            onSelect={({
+              executeFilterSearch,
+              newDisplayName,
+              newFilter,
+              setCurrentFilter,
+            }) => {
+              searchActions.setFilterOption({
+                filter: newFilter,
+                displayName: newDisplayName,
+                selected: true,
+              });
+              setCurrentFilter(newFilter);
+              executeFilterSearch(newDisplayName);
             }}
             searchFields={[
               {
@@ -109,8 +99,19 @@ const DoctorFilterSearch = ({
               nonHighlighted: "text-sm",
               sectionLabel: "text-lg",
             }}
-            onSelect={(params) => {
-              setLocationDisplayName(params.newDisplayName);
+            onSelect={({
+              executeFilterSearch,
+              newDisplayName,
+              newFilter,
+              setCurrentFilter,
+            }) => {
+              searchActions.setFilterOption({
+                filter: newFilter,
+                displayName: newDisplayName,
+                selected: true,
+              });
+              setCurrentFilter(newFilter);
+              executeFilterSearch(newDisplayName);
             }}
             searchFields={[
               {
@@ -133,8 +134,19 @@ const DoctorFilterSearch = ({
               nonHighlighted: "text-sm",
               sectionLabel: "text-lg",
             }}
-            onSelect={(params) => {
-              setLanguage(params.newDisplayName);
+            onSelect={({
+              executeFilterSearch,
+              newDisplayName,
+              newFilter,
+              setCurrentFilter,
+            }) => {
+              searchActions.setFilterOption({
+                filter: newFilter,
+                displayName: newDisplayName,
+                selected: true,
+              });
+              setCurrentFilter(newFilter);
+              executeFilterSearch(newDisplayName);
             }}
             searchFields={[
               {
@@ -143,7 +155,10 @@ const DoctorFilterSearch = ({
               },
             ]}
           />
-          <button className="bg-green-700 flex justify-center items-center p-1  my-auto rounded-full">
+          <button
+            className="bg-green-700 flex justify-center items-center p-1  my-auto rounded-full"
+            onClick={handleSearchClick}
+          >
             <MagnifyingGlassIcon className="h-6 w-6 text-white " />
             <p className="text-white text-sm ml-2 lg:hidden">Search</p>
           </button>

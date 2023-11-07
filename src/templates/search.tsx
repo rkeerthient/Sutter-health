@@ -15,7 +15,7 @@ import { SearchBar } from "@yext/search-ui-react";
 import { Link } from "react-router-dom";
 import SearchResults from "../pages/SearchResults";
 import NavBar from "../components/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfessionalCard from "../components/Cards/ProfessionalCard";
 import { CardComponent, StandardCard } from "@yext/search-ui-react";
 
@@ -47,56 +47,11 @@ export const getHeadConfig: GetHeadConfig<
 };
 
 const Search: Template<TemplateRenderProps> = ({ document }) => {
-  const [verticalKey, setVerticalKey] = useState("");
-  const [cardType, setCardType] = useState<any>();
-  const handleClick = (id: string) => {
-    id === "healthcare_professionals"
-      ? setCardType("ProfessionalCard")
-      : id === "healthcare_facilities"
-      ? setCardType("FacilityCard")
-      : id === "services"
-      ? setCardType("ServicesCard")
-      : StandardCard;
-    setVerticalKey(id);
-  };
-
   return (
     <>
       <PageLayout>
         <div className="max-w-screen-2xl mx-auto px-20">
-          <div className=" w-full px-10">
-            <SearchBar />
-            <div className=" bg-white">
-              <NavBar
-                onSelect={handleClick}
-                items={[
-                  {
-                    label: "All Results",
-                    id: "all",
-                  },
-
-                  {
-                    label: "Doctors",
-                    id: "healthcare_professionals",
-                  },
-                  {
-                    label: "Healthcare Facilities",
-                    id: "healthcare_facilities",
-                  },
-                  {
-                    label: "Services",
-                    id: "services",
-                  },
-                ]}
-                selectedId={verticalKey ?? "all"}
-              />
-            </div>
-            <SearchResults
-              cardType={cardType}
-              vertKey={verticalKey}
-              isUniversal={false}
-            ></SearchResults>
-          </div>
+          <SearchResults></SearchResults>
         </div>
       </PageLayout>
     </>
