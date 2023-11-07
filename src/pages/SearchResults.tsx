@@ -89,10 +89,10 @@ const SearchResults = ({
   return (
     <>
       {cardType === "FacilityCard" ? (
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-2 mt-4 w-full">
           <div
             className={`
-                  w-2/5 md:overflow-scroll md:h-[800px]`}
+                  w-2/4 md:overflow-scroll md:h-[800px]`}
           >
             <div className="flex items-baseline">
               <ResultsCount />

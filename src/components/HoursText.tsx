@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const HoursText = ({ document }: any) => {
+const HoursText = ({ document, status }: any) => {
   const { hours, timezone } = document;
 
   const getStatus = (currentDay: any, currentTime: any, hours: any) => {
@@ -81,25 +81,25 @@ const HoursText = ({ document }: any) => {
     return h + ":" + m;
   };
   const res = getDayName(hours, timezone);
-  console.log(JSON.stringify(res));
+  status(res.status);
 
   return (
-    <div className="hero mt-4 w-full">
-      <div className="hero-row flex">
+    <div className="hero w-full">
+      <div className="hero-row flex   ">
         <div
           className={
             res.status.includes("Open")
-              ? "text-2xl text-gray-600 Hero-hoursToday storeOpen flex gap-1 items-center w-max "
-              : "text-2xl text-gray-600 Hero-hoursToday storeClosed flex gap-1 items-center w-max "
+              ? "  font-semibold Hero-hoursToday text-[#3e8033] flex gap-1 items-center w-max "
+              : " font-semibold Hero-hoursToday text-red-700 flex gap-1 items-center w-max "
           }
         >
-          <p className="">
-            {res.status === "Open now"
+          <p className="uppercase">
+            {res.status.toLocaleLowerCase() === "open now"
               ? "Open Now - "
-              : res.status === "Closed"
+              : res.status.toLocaleLowerCase() === "closed"
               ? "Closed  - "
-              : res.status === "Closed perm"
-              ? "Closed"
+              : res.status.toLocaleLowerCase() === "closed perm"
+              ? "Closed Permanently"
               : ""}
           </p>
           {res.status !== "Closed perm" && res.text}

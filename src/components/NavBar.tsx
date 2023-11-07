@@ -20,7 +20,7 @@ export default function NavBar({ items, onSelect, selectedId }: NavBarProps) {
   };
 
   return (
-    <div className="mx-auto max-w-[1440px] px-20">
+    <div className="mx-auto ">
       <div className="h-16 justify-between border-b hidden sm:flex ">
         <div className="ml-6 flex justify-between flex-1">
           {items.map(({ label, id }) => (

@@ -63,8 +63,8 @@ const Search: Template<TemplateRenderProps> = ({ document }) => {
   return (
     <>
       <PageLayout>
-        <div className="centered-container">
-          <div className="section w-full px-10">
+        <div className="max-w-screen-2xl mx-auto px-20">
+          <div className=" w-full px-10">
             <SearchBar />
             <div className=" bg-white">
               <NavBar
