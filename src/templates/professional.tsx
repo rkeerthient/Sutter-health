@@ -19,18 +19,10 @@ import {
   TemplateRenderProps,
 } from "@yext/pages";
 import * as React from "react";
-import Banner from "../components/banner";
-import Contact from "../components/contact";
-import Cta from "../components/cta";
-import Hours from "../components/hours";
-import List from "../components/list";
 import PageLayout from "../components/page-layout";
-import StaticMap from "../components/static-map";
 import "../index.css";
 import { Image } from "@yext/pages/components";
 import Address from "../components/Address";
-import FormatPhone from "../components/FormatPhone";
-import { LexicalRichText } from "@yext/react-components";
 import Carousel from "../components/Carousel";
 /**
  * Required when Knowledge Graph data is used for a template.

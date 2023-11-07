@@ -102,8 +102,6 @@ export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
  * This can include the title, meta tags, script tags, etc.
  */
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
   document,
 }): HeadConfig => {
   return {
@@ -131,20 +129,13 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
  * components any way you'd like as long as it lives in the src folder (though you should not put
  * them in the src/templates folder as this is specific for true template files).
  */
-const Location: Template<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
-  document,
-}) => {
+const Location: Template<TemplateRenderProps> = ({ document }) => {
   const {
-    _site,
     name,
     address,
-    openTime,
     hours,
     mainPhone,
     geocodedCoordinate,
-    services,
     photoGallery,
     frequentlyAskedQuestions,
     c_cRichTextDesc,
@@ -197,19 +188,21 @@ const Location: Template<TemplateRenderProps> = ({
         </div>
         <div className="bg-[#008080] py-5 ">
           <div className="text-3xl text-white centered-container">
-            Please call (415) 641-6996 to schedule an appointment.
+            Please call {mainPhone} to schedule an appointment.
           </div>
         </div>
-        <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-          <div className="font-bold w-1/5 text-lg">
-            About Alta Bates High Risk Infant Follow Up Clinic
+        {c_cRichTextDesc && (
+          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">
+              About Alta Bates High Risk Infant Follow Up Clinic
+            </div>
+            <div className="flex-1">
+              <LexicalRichText
+                serializedAST={JSON.stringify(c_cRichTextDesc.json)}
+              />
+            </div>
           </div>
-          <div className="flex-1">
-            <LexicalRichText
-              serializedAST={JSON.stringify(c_cRichTextDesc.json)}
-            />
-          </div>
-        </div>
+        )}
         {frequentlyAskedQuestions && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-lg">
