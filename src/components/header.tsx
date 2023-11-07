@@ -36,7 +36,7 @@ const Header = () => {
           <a href="/search.html" className="text-white py-4 font-bold ">
             Search
           </a>
-          <a href="" className="text-white py-4 font-bold ">
+          <a href="/root.html" className="text-white py-4 font-bold ">
             Directory
           </a>
         </div>
