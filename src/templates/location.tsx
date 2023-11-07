@@ -143,6 +143,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     c_servicesfacility,
     c_docToLoc,
   } = document;
+  console.log(c_cRichTextDesc);
 
   return (
     <PageLayout>
@@ -191,7 +192,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             Please call {mainPhone} to schedule an appointment.
           </div>
         </div>
-        {c_cRichTextDesc && (
+        {/* {c_cRichTextDesc && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-lg">
               About Alta Bates High Risk Infant Follow Up Clinic
@@ -202,7 +203,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
               />
             </div>
           </div>
-        )}
+        )} */}
         {frequentlyAskedQuestions && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-lg">
@@ -218,7 +219,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             </div>
           </div>
         )}
-        {c_disabilityServices && (
+        {/* {c_disabilityServices && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-lg">Disability Services</div>
             <div className="flex-1">
@@ -227,7 +228,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
               />
             </div>
           </div>
-        )}
+        )} */}
 
         {c_servicesfacility && (
           <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">

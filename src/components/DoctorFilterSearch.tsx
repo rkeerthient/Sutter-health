@@ -82,7 +82,6 @@ const DoctorFilterSearch = ({
               sectionLabel: "text-lg",
             }}
             onSelect={(params) => {
-              const { fieldId, matcher, value } = params.newFilter;
               setService(params.newDisplayName);
             }}
             searchFields={[
@@ -111,7 +110,6 @@ const DoctorFilterSearch = ({
               sectionLabel: "text-lg",
             }}
             onSelect={(params) => {
-              const { fieldId, matcher, value } = params.newFilter;
               setLocationDisplayName(params.newDisplayName);
             }}
             searchFields={[
@@ -136,7 +134,6 @@ const DoctorFilterSearch = ({
               sectionLabel: "text-lg",
             }}
             onSelect={(params) => {
-              const { fieldId, matcher, value } = params.newFilter;
               setLanguage(params.newDisplayName);
             }}
             searchFields={[
