@@ -24,6 +24,7 @@ import "../index.css";
 import { Image } from "@yext/pages/components";
 import Address from "../components/Address";
 import Carousel from "../components/Carousel";
+import FormatPhone from "../components/FormatPhone";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -149,6 +150,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
   const {
     address,
     headshot,
+    mainPhone,
     c_docToLoc,
     c_servicesdoctors,
     c_nearByDocs,
@@ -178,10 +180,12 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
               />
             )}
             <div className="flex flex-col gap-4">
-              <h1 className="text-4xl font-bold">Gregory S. Vuksinich, M.D.</h1>
+              <h1 className="text-4xl font-bold">{name}</h1>
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col">
-                  <div>(209) 223-7420</div>
+                  <div>
+                    <FormatPhone phoneNumber={mainPhone}></FormatPhone>
+                  </div>
                   <div>
                     <Address address={address}></Address>
                   </div>
