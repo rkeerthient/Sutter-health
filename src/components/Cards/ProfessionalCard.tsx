@@ -1,48 +1,84 @@
 import { CardProps } from "@yext/search-ui-react";
 import * as React from "react";
 import HealthcareProfessional from "../../types/healthcare_professionals";
-import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
+import {
+  CheckIcon,
+  MapPinIcon,
+  PhoneIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid";
 import { Image } from "@yext/pages/components";
+import Address from "../Address";
+import FormatPhone from "../FormatPhone";
+import HoursText from "../HoursText";
 
 const ProfessionalCard = ({ result }: CardProps<HealthcareProfessional>) => {
   const { name } = result;
-  const { headshot, mainPhone, c_speciality } = result.rawData;
+  const {
+    headshot,
+    slug,
+    mainPhone,
+    c_speciality,
+    address,
+    acceptingNewPatients,
+    languages,
+    hours,
+  } = result.rawData;
   return (
-    <div className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
-      <div className="flex flex-1 flex-col p-8">
-        {headshot && (
-          <Image
-            image={headshot}
-            className="mx-auto h-52 w-52 flex-shrink-0 rounded-full"
-          ></Image>
-        )}
-        <h3 className="mt-6 text-sm font-medium text-gray-900">{name}</h3>
-        <dl className="mt-1 flex flex-grow flex-col justify-between">
-          <dt className="sr-only">Title</dt>
-          <dd className="text-sm text-gray-500">{c_speciality?.join(", ")}</dd>
-        </dl>
-      </div>
-      <div>
-        <div className="-mt-px flex divide-x divide-gray-200">
-          <div className="flex w-0 flex-1">
-            <a className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
-              <EnvelopeIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              Email
-            </a>
-          </div>
-          <div className="-ml-px flex w-0 flex-1">
-            <a
-              href={`tel:${mainPhone}`}
-              className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-            >
-              <PhoneIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-              Call
-            </a>
+    <div className="grid grid-cols-3 border p-4 items-start">
+      {headshot && (
+        <Image
+          image={headshot}
+          className="mx-auto h-52 w-52 flex-shrink-0 rounded-full"
+        ></Image>
+      )}
+      <div className="my-auto">
+        <div className="text-2xl font-bold text-[#008080]">{name}</div>
+        <div className="flex flex-1">
+          <div className="flex flex-col gap-2">
+            <div>
+              <Address address={address}></Address>
+            </div>
+
+            <div>
+              <FormatPhone phoneNumber={mainPhone}></FormatPhone>
+            </div>
+            <div className="flex flex-col text-sm gap-2 mt-4">
+              <div className="font-bold ">{c_speciality}</div>
+              <div className="flex gap-1">
+                {acceptingNewPatients ? (
+                  <CheckIcon className="h-4 w-4 text-[#008080]" />
+                ) : (
+                  <XMarkIcon className="h-4 w-4 text-red-600" />
+                )}
+                <div>Accepting New Patients</div>
+              </div>
+            </div>
+            <div className="flex flex-col text-sm gap-2 mt-2 ">
+              <div className="font-bold ">Languages</div>
+              <div className="grid grid-cols-2 gap-3">
+                {languages?.map((item, index) => (
+                  <div key={index}>{item}</div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="m-auto flex flex-col gap-6">
+        {hours && <HoursText document={result.rawData} />}
+        <a
+          href="#"
+          className="w-full uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border"
+        >
+          Book Appointment
+        </a>
+        <a
+          href={`/${slug}`}
+          className="w-full uppercase text-[#066] hover:text-white border-2 border-[#066] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 "
+        >
+          View Details
+        </a>
       </div>
     </div>
   );

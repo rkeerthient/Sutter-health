@@ -1,3 +1,4 @@
+import { MapPinIcon } from "@heroicons/react/20/solid";
 import * as React from "react";
 
 export type Address = {
@@ -17,10 +18,13 @@ const Address = (props: AddressProps) => {
   const { address } = props;
   const { line1, line2, line3, postalCode, region, city } = address;
   return (
-    <div className="flex flex-col">
-      <div>{line1}</div>
-      {line2 && <div>line2</div>}
-      <div>{`${city}, ${region}, ${postalCode}`}</div>
+    <div className="flex flex-row gap-2 items-start">
+      <MapPinIcon className="h-4 w-4 mt-2" />
+      <div className="flex flex-col underline">
+        <div>{line1}</div>
+        {line2 && <div>{line2}</div>}
+        <div>{`${city}, ${region}, ${postalCode}`}</div>
+      </div>
     </div>
   );
 };
