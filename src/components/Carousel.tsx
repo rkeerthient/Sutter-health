@@ -81,8 +81,8 @@ const Carousel = (props: any) => {
               className="p-4 flex-col flex justify-between leading-6 font-normal"
             >
               <StaticMap
-                latitude={item.geocodedCoordinate.latitude}
-                longitude={item.geocodedCoordinate.longitude}
+                latitude={item.yextDisplayCoordinate.latitude}
+                longitude={item.yextDisplayCoordinate.longitude}
               ></StaticMap>
               <a
                 key={index}

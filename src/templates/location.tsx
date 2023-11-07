@@ -45,7 +45,7 @@ export const config: TemplateConfig = {
       "description",
       "hours",
       "slug",
-      "geocodedCoordinate",
+      "yextDisplayCoordinate",
       "services",
       "photoGallery",
       "frequentlyAskedQuestions",
@@ -135,7 +135,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     address,
     hours,
     mainPhone,
-    geocodedCoordinate,
+    yextDisplayCoordinate,
     photoGallery,
     frequentlyAskedQuestions,
     c_cRichTextDesc,
@@ -159,7 +159,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
                     <FormatPhone phoneNumber={mainPhone}></FormatPhone>
                   </div>
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${geocodedCoordinate.latitude},${geocodedCoordinate.longitude}`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${yextDisplayCoordinate.latitude},${yextDisplayCoordinate.longitude}`}
                     className="px-4 w-fit py-2 bg-[#008080] text-white font-bold text-sm uppercase  rounded-md"
                   >
                     Map & Directions

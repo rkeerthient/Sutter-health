@@ -48,7 +48,7 @@ export const config: TemplateConfig = {
       "c_cRichTextDesc",
       "c_disabilityServices",
       "c_docToLoc.name",
-      "c_docToLoc.geocodedCoordinate",
+      "c_docToLoc.yextDisplayCoordinate",
       "c_docToLoc.address",
       "c_docToLoc.slug",
       "c_docToLoc.headshot",
