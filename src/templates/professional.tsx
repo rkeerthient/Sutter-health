@@ -47,11 +47,8 @@ export const config: TemplateConfig = {
       "name",
       "address",
       "mainPhone",
-      "description",
-      "hours",
       "slug",
       "geocodedCoordinate",
-      "services",
       "photoGallery",
       "languages",
       "headshot",
@@ -129,8 +126,6 @@ export const getRedirects: GetRedirects<TemplateProps> = ({ document }) => {
  * This can include the title, meta tags, script tags, etc.
  */
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
   document,
 }): HeadConfig => {
   return {
@@ -158,43 +153,23 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
  * components any way you'd like as long as it lives in the src folder (though you should not put
  * them in the src/templates folder as this is specific for true template files).
  */
-const Location: Template<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-  path,
-  document,
-}) => {
+const Location: Template<TemplateRenderProps> = ({ document }) => {
   const {
-    _site,
-    name,
     address,
-    openTime,
-    hours,
-    mainPhone,
     headshot,
-    geocodedCoordinate,
-    services,
-    photoGallery,
-    frequentlyAskedQuestions,
-    c_cRichTextDesc,
-    c_disabilityServices,
-    c_servicesfacility,
     c_docToLoc,
     c_servicesdoctors,
     c_nearByDocs,
     c_affiliations,
-    c_communityActivities,
     c_additionalInformation,
     c_personalInterests,
     c_philosophyOfCare,
     c_professionalInterest,
     c_professionalInterest1,
-    c_publications,
-    c_rating,
-    c_votes,
-    c_speciality,
     languages,
     c_credentialsAndNotables,
     certifications,
+    name,
   } = document;
 
   return (
@@ -219,7 +194,7 @@ const Location: Template<TemplateRenderProps> = ({
                     <Address address={address}></Address>
                   </div>
                 </div>
-                <div className="text-lg font-bold">Anesthesiology</div>
+                <div className="text-lg font-bold">{name}</div>
               </div>
             </div>
           </div>
@@ -283,7 +258,7 @@ const Location: Template<TemplateRenderProps> = ({
             </div>
             <div className="flex-1 flex flex-col gap-4">
               <div className="flex-1 grid grid-cols-4 gap-4">
-                {c_credentialsAndNotables.map((item, index) => (
+                {c_credentialsAndNotables.map((item) => (
                   <div>{item.replace('"', "")}</div>
                 ))}
               </div>
