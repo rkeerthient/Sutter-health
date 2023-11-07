@@ -28,25 +28,22 @@ const Header = () => {
 
   return (
     <>
-      <div className="centered-container">
-        <nav className="py-6 flex items-center justify-between">
-          <img
-            src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc"
-            width="50"
-            height="50"
-          ></img>
-          <div className="text-2xl font-semibold">Turtlehead Tacos</div>
-          <div className="flex gap-x-10 text-lg font-semibold">{linkDoms}</div>
-          <div className="space-x-5">
-            <Cta buttonText="Order Pickup" url="#" style="primary-cta"></Cta>
-            <Cta
-              buttonText="Order Delivery"
-              url="#"
-              style="secondary-cta"
-            ></Cta>
-          </div>
-        </nav>
+      <div className=" bg-[#003333]">
+        <div className="flex justify-end centered-container gap-6">
+          <a href="/index.html" className="text-white py-4 font-bold ">
+            Home
+          </a>
+          <a href="/search.html" className="text-white py-4 font-bold ">
+            Search
+          </a>
+          <a href="" className="text-white py-4 font-bold ">
+            Directory
+          </a>
+        </div>
       </div>
+
+      <img src="https://i.imgur.com/ARYzCu4.png" alt="" className="w-full " />
+      <hr />
     </>
   );
 };

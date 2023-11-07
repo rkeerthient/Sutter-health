@@ -16,9 +16,11 @@ const PageLayout = ({ _site, children }: Props) => {
   return (
     <div className="min-h-screen">
       <Header _site={_site} />
-      <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-        {children}
-      </SearchHeadlessProvider>
+      <div className="my-8">
+        <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
+          {children}
+        </SearchHeadlessProvider>
+      </div>
       <Footer _site={_site}></Footer>
     </div>
   );
