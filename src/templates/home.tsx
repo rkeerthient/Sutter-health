@@ -14,7 +14,26 @@ import PageLayout from "../components/page-layout";
 import PhotoHero from "../components/PhotoHero";
 import DoctorFilterSearch from "../components/DoctorFilterSearch";
 export const config: TemplateConfig = {
-  name: "home",
+  stream: {
+    $id: "my-stream-home",
+    fields: [
+      "id",
+      "uid",
+      "meta",
+      "slug",
+      "c_homeToServices.name",
+      "c_homeToServices.slug",
+    ],
+    // Defines the scope of entities that qualify for this stream.
+    filter: {
+      entityIds: ["home"],
+    },
+    // The entity language profiles that documents will be generated for.
+    localization: {
+      locales: ["en"],
+      primary: false,
+    },
+  },
 };
 
 export const getPath: GetPath<TemplateRenderProps> = () => {
@@ -144,6 +163,22 @@ const Home = ({ document }: TemplateRenderProps) => {
                   Get Started
                 </Button>
               </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <div className="self-stretch  text-zinc-900 text-4xl font-medium leading-[56px] flex justify-center">
+              All Treatments and Services
+            </div>
+            <div className="grid grid-cols-4 gap-4">
+              {document.c_homeToServices.map((item, index) => (
+                <a
+                  key={index}
+                  className="bg-white h-[80px] border px-6  text-xl items-center flex justify-start shadow-md hover:border-[#008080]"
+                  href={`/${item.slug}`}
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
