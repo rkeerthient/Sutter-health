@@ -148,7 +148,10 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
             <div className="font-bold w-1/5 text-xl">About</div>
             <div className="flex-1 flex flex-col gap-4">
               <LexicalRichText
-                serializedAST={JSON.stringify(richTextDescriptionV2.json)}
+                serializedAST={
+                  richTextDescriptionV2 &&
+                  JSON.stringify(richTextDescriptionV2.json)
+                }
               />
             </div>
           </div>
