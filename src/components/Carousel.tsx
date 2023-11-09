@@ -11,12 +11,13 @@ const Carousel = (props: any) => {
   const { data, type } = props;
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: props.slidesToShow,
     slidesToScroll: 1,
     initialSlide: 0,
+
     responsive: [
       {
         breakpoint: 1024,
@@ -49,7 +50,7 @@ const Carousel = (props: any) => {
       {data &&
         data.map((item: any, index: any) => {
           return type === "doctor" ? (
-            <div key={index} className="p-4 font-normal">
+            <div key={index} className="p-4 font-normal border">
               {item.headshot ? (
                 <div className="w-20 h-20 overflow-hidden rounded-full    ">
                   <Image
@@ -69,7 +70,7 @@ const Carousel = (props: any) => {
               <a
                 key={index}
                 href={`/${item.slug}`}
-                className="text-[#008080] my-2 font-bold"
+                className="text-[#008080] my-2 font-bold text-lg"
               >
                 {item.name}
               </a>
@@ -100,8 +101,8 @@ const Carousel = (props: any) => {
               key={index}
               className="p-4 flex-col flex justify-between leading-6 font-normal"
             >
-              {item.primaryPhoto ? (
-                <Image image={item.primaryPhoto}></Image>
+              {item.c_imageUrl ? (
+                <img src={item.c_imageUrl}></img>
               ) : (
                 <img
                   className="object-fit object-center max-w-[584px] w-full border"

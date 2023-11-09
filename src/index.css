@@ -48,7 +48,7 @@
 
 .slick-prev::before,
 .slick-next::before {
-  color: orange !important;
+  color: #008080 !important;
   font-size: 2rem !important;
 }
 
@@ -63,7 +63,7 @@
 .slick-list {
   margin: 0 auto !important;
 }
-
+/* 
 .slick-prev {
   left: 2em;
 }
@@ -78,7 +78,7 @@
 .slick-next {
   right: 7% !important;
   z-index: 1;
-}
+} */
 
 @media only screen and (max-width: 768px) {
   .slick-prev {

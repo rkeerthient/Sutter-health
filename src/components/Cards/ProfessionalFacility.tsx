@@ -20,7 +20,7 @@ const ProfessionalFacility = ({ result }: CardProps<HealthcareFacility>) => {
     val === "Closed perm" ? setShowBooking(false) : setShowBooking(true);
   };
   return (
-    <div className="flex flex-1 p-2 border flex-col">
+    <div className="flex flex-1 p-2 border flex-col justify-start ">
       <div className="flex flex-row gap-4">
         {photoGallery ? (
           <div>
@@ -35,30 +35,32 @@ const ProfessionalFacility = ({ result }: CardProps<HealthcareFacility>) => {
         )}
         <div>
           <div className="flex flex-col">
-            <h3 className="font-semibold text-[#008080] text-xl">{name}</h3>
+            <h3 className="font-semibold text-[#008080] text-base h-18">
+              {name}
+            </h3>
             {address && <Address address={address}></Address>}
             {mainPhone && <FormatPhone phoneNumber={mainPhone} />}
-            {hours && (
-              <>
-                <div className="flex gap-2 font-bold mt-2 items-center">
-                  <div>Hours</div>
-                  <ChevronDownIcon
-                    onClick={() => setShowHours(!showHours)}
-                    className={`${
-                      !showHours ? `rotate-180 transform h-6 w-6` : `h-6 w-6`
-                    }`}
-                  />
-                </div>
-                {showHours ? (
-                  <HoursText document={result.rawData} status={getStatus} />
-                ) : (
-                  <Hours hours={hours} />
-                )}
-              </>
-            )}
           </div>
         </div>
       </div>
+      {hours && (
+        <div className="flex flex-col">
+          <div className="flex gap-2 font-bold mt-2 items-center">
+            <div>Hours</div>
+            <ChevronDownIcon
+              onClick={() => setShowHours(!showHours)}
+              className={`${
+                !showHours ? `rotate-180 transform h-6 w-6` : `h-6 w-6`
+              }`}
+            />
+          </div>
+          {showHours ? (
+            <HoursText document={result.rawData} status={getStatus} />
+          ) : (
+            <Hours hours={hours} />
+          )}
+        </div>
+      )}
       <div className="flex gap-2 mx-auto w-full mt-4">
         {showBooking && (
           <div className="w-1/2 uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border">

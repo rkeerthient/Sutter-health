@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 
 const HoursText = ({ document, status }: any) => {
   const { hours, timezone } = document;
@@ -81,8 +82,9 @@ const HoursText = ({ document, status }: any) => {
     return h + ":" + m;
   };
   const res = getDayName(hours, timezone);
-  status(res.status);
-
+  useEffect(() => {
+    status(res.status);
+  }, [res.status, status]);
   return (
     <div className="hero w-full">
       <div className="hero-row flex   ">

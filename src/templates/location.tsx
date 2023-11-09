@@ -58,6 +58,7 @@ export const config: TemplateConfig = {
       "c_docToLoc.slug",
       "c_docToLoc.headshot",
       "c_docToLoc.c_speciality",
+      "c_affiliations",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -142,6 +143,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     c_disabilityServices,
     c_servicesfacility,
     c_docToLoc,
+    c_affiliations,
   } = document;
 
   return (
@@ -172,8 +174,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
                     NETWORK AFFILIATION
                   </div>
                   <div>
-                    This location is part of Sutter Health's California Pacific
-                    Medical Center.
+                    This location is part of Sutter Health's {c_affiliations}
                   </div>
                 </div>
                 <div className="flex flex-col">
@@ -193,9 +194,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
         </div>
         {c_cRichTextDesc && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">
-              About Alta Bates High Risk Infant Follow Up Clinic
-            </div>
+            <div className="font-bold w-1/5 text-lg">About {name}</div>
             <div className="flex-1">
               <LexicalRichText
                 serializedAST={JSON.stringify(c_cRichTextDesc.json)}

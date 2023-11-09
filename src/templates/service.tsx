@@ -21,8 +21,6 @@ import {
 import * as React from "react";
 import PageLayout from "../components/page-layout";
 import "../index.css";
-import { Image } from "@yext/pages/components";
-import Address from "../components/Address";
 import Carousel from "../components/Carousel";
 import { LexicalRichText } from "@yext/react-components";
 /**
@@ -44,11 +42,15 @@ export const config: TemplateConfig = {
       "richTextDescriptionV2",
       "c_servicesfacility.name",
       "c_servicesfacility.slug",
-      "c_servicesfacility.primaryPhoto",
+      "c_servicesfacility.photoGallery",
+      "c_servicesfacility.yextDisplayCoordinate",
       "c_servicesdoctors.name",
       "c_servicesdoctors.slug",
       "c_servicesdoctors.headshot",
       "c_servicesdoctors.c_speciality",
+      "c_servicesservices.name",
+      "c_servicesservices.c_imageUrl",
+      "c_servicesservices.slug",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -124,13 +126,14 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
     shortDescriptionV2,
     richTextDescriptionV2,
     c_servicesdoctors,
+    c_servicesservices,
   } = document;
 
   return (
     <PageLayout>
       <div className="space-y-8 text-lg">
         <div className="centered-container  flex flex-row gap-16">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-1/2">
             <h1 className="text-4xl font-bold">{name}</h1>
             {shortDescriptionV2 && (
               <div>
@@ -142,7 +145,18 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
           </div>
           <div>{c_imageUrl && <img src={c_imageUrl}></img>}</div>
         </div>
-
+        {c_servicesservices && (
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">Featured Services</div>
+            <div className="w-4/5">
+              <Carousel
+                data={c_servicesservices}
+                slidesToShow={4}
+                type="service"
+              />
+            </div>
+          </div>
+        )}
         {richTextDescriptionV2 && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-xl">About</div>
@@ -157,26 +171,22 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
       </div>
-      {c_servicesfacility && (
-        <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-          <div className="font-bold w-1/5 text-lg">Services Offered</div>
-          <div className="w-4/5">
-            <Carousel
-              data={c_servicesfacility}
-              slidesToShow={4}
-              type="service"
-            />
-          </div>
-        </div>
-      )}
       {c_servicesdoctors && (
         <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
           <div className="font-bold w-1/5 text-xl">Related Service Lines</div>
           <div className="w-4/5">
+            <Carousel data={c_servicesdoctors} slidesToShow={4} type="doctor" />
+          </div>
+        </div>
+      )}
+      {c_servicesfacility && (
+        <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+          <div className="font-bold w-1/5 text-lg">Services Near You</div>
+          <div className="w-4/5">
             <Carousel
-              data={c_servicesdoctors}
+              data={c_servicesfacility}
               slidesToShow={4}
-              type="service"
+              type="facility"
             />
           </div>
         </div>
