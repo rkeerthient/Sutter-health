@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchBar } from "@yext/search-ui-react";
 import * as React from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -7,8 +7,10 @@ import FacilitiesPage from "../components/Pages/FacilitiesPage";
 import ServicePage from "../components/Pages/ServicesPage";
 import ProfessionalPage from "../components/Pages/ProfessionalPage";
 import UniversalResult from "../components/Pages/UniversalResults";
+import { useSearchActions } from "@yext/search-headless-react";
 
 const SearchResults = () => {
+  const searchActions = useSearchActions();
   const [currentPath, setCurrentPath] = useState({
     label: "All Results",
     id: "all",
@@ -33,6 +35,28 @@ const SearchResults = () => {
       id: "services",
     },
   ];
+
+  useEffect(() => {
+    console.log(currentPath);
+
+    const queryParams = new URLSearchParams(window.location.search);
+    currentPath.id !== "all"
+      ? queryParams.set("vertical", currentPath.id)
+      : queryParams.delete("vertical");
+    history.pushState(null, "", "?" + queryParams.toString());
+  }, [currentPath]);
+
+  useEffect(() => {
+    const verticalKey = new URLSearchParams(window.location.search).get(
+      "vertical"
+    );
+    const query = new URLSearchParams(window.location.search).get("query");
+    verticalKey &&
+      (setCurrentPath(navbarItem.filter((item) => item.id === verticalKey)[0]),
+      searchActions.setVertical(verticalKey));
+    query && searchActions.setQuery(query);
+    searchActions.executeVerticalQuery();
+  }, []);
   return (
     <>
       <div className=" w-full px-10 ">
