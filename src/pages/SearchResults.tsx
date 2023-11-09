@@ -45,16 +45,25 @@ const SearchResults = () => {
   }, [currentPath]);
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+
     const verticalKey = new URLSearchParams(window.location.search).get(
       "vertical"
     );
     const query = new URLSearchParams(window.location.search).get("query");
-    verticalKey &&
-      (setCurrentPath(navbarItem.filter((item) => item.id === verticalKey)[0]),
-      searchActions.setVertical(verticalKey));
+    verticalKey
+      ? (setCurrentPath(
+          navbarItem.filter((item) => item.id === verticalKey)[0]
+        ),
+        searchActions.setVertical(verticalKey))
+      : queryParams.delete("vertical");
     query && searchActions.setQuery(query);
-    searchActions.executeVerticalQuery();
+    verticalKey
+      ? (searchActions.setVertical(verticalKey),
+        searchActions.executeVerticalQuery())
+      : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
   }, []);
+
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
@@ -70,6 +79,7 @@ const SearchResults = () => {
       ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
       : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
   };
+
   return (
     <>
       <div className=" w-full px-10 ">

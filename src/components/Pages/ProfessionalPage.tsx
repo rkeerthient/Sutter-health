@@ -12,6 +12,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import ProfessionalCard from "../Cards/ProfessionalCard";
 import Loader from "../Loader";
+import ToggleFacet from "../FacetToggle";
 
 type verticalKey = {
   verticalKey: string;
@@ -36,7 +37,16 @@ const ProfessionalPage = ({ verticalKey }: verticalKey) => {
       ) : (
         <div className="flex mt-4">
           <div className="w-64 shrink-0 mr-5 mt-4">
-            <Facets />
+            {/* <ToggleFacet fieldId={"acceptingNewPatients"}></ToggleFacet>
+            <ToggleFacet fieldId={"c_videoVisits"}></ToggleFacet>
+            <ToggleFacet fieldId={"c_myHealthOnline"}></ToggleFacet> */}
+            <Facets
+              // excludedFieldIds={[
+              //   "c_videoVisits",
+              //   "c_myHealthOnline",
+              //   "acceptingNewPatients",
+              // ]}
+            />
           </div>
           <div className="flex-grow">
             <div className="flex flex-col items-baseline">
