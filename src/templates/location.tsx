@@ -53,7 +53,7 @@ export const config: TemplateConfig = {
       "c_disabilityServices",
       "c_servicesfacility.name",
       "c_servicesfacility.slug",
-      "c_servicesfacility.primaryPhoto",
+      "c_servicesfacility.c_imageUrl",
       "c_docToLoc.name",
       "c_docToLoc.slug",
       "c_docToLoc.headshot",
@@ -254,10 +254,3 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
 };
 
 export default Location;
-// <a
-//   key={index}
-//   href={item.slug}
-//   className="text-[#008080] font-bold border-t-2 border-spacing-4"
-// >
-//   {item.name}
-// </a>

@@ -56,7 +56,7 @@ export const config: TemplateConfig = {
       "c_docToLoc.c_speciality",
       "c_servicesdoctors.name",
       "c_servicesdoctors.slug",
-      "c_servicesdoctors.headshot",
+      "c_servicesdoctors.c_imageUrl",
       "c_servicesdoctors.c_speciality",
       "c_nearByDocs.name",
       "c_nearByDocs.slug",

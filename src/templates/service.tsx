@@ -43,6 +43,7 @@ export const config: TemplateConfig = {
       "c_servicesfacility.name",
       "c_servicesfacility.slug",
       "c_servicesfacility.photoGallery",
+      "c_servicesfacility.address",
       "c_servicesfacility.yextDisplayCoordinate",
       "c_servicesdoctors.name",
       "c_servicesdoctors.slug",
