@@ -8,8 +8,9 @@ import Address from "./Address";
 import StaticMap from "./static-map";
 
 const Carousel = (props: any) => {
-  const { data, type } = props;
-
+  let { data, type } = props;
+  console.log(JSON.stringify(data[0].dm_directoryChildren));
+  data = (type = "facility_nearby") ? data[0].dm_directoryChildren : data;
   const settings = {
     dots: true,
     infinite: false,
@@ -75,6 +76,26 @@ const Carousel = (props: any) => {
                 {item.name}
               </a>
               <div className="">{item.c_speciality}</div>
+            </div>
+          ) : type === "facility_nearby" ? (
+            <div
+              key={index}
+              className="p-4 flex-col flex justify-between leading-6 font-normal"
+            >
+              <StaticMap
+                latitude={item.yextDisplayCoordinate.latitude}
+                longitude={item.yextDisplayCoordinate.longitude}
+              ></StaticMap>
+              <a
+                key={index}
+                href={`/${item.slug}`}
+                className="text-[#008080] my-2 font-bold"
+              >
+                {item.name}
+              </a>
+              <div>
+                <Address address={item.address} />
+              </div>
             </div>
           ) : type === "facility" ? (
             <div

@@ -59,6 +59,19 @@ export const config: TemplateConfig = {
       "c_docToLoc.headshot",
       "c_docToLoc.c_speciality",
       "c_affiliations",
+      "dm_directoryParents.meta",
+      "dm_directoryParents.name",
+      "dm_directoryParents.slug",
+      "dm_directoryParents.yextDisplayCoordinate.latitude",
+      "dm_directoryParents.yextDisplayCoordinate.longitude",
+      "dm_directoryParents.dm_directoryChildren.yextDisplayCoordinate.latitude",
+      "dm_directoryParents.dm_directoryChildren.yextDisplayCoordinate.longitude",
+      "dm_directoryParents.dm_directoryChildren.name",
+      "dm_directoryParents.dm_directoryChildren.address",
+      "dm_directoryParents.dm_directoryChildren.hours",
+      "dm_directoryParents.dm_directoryChildren.slug",
+      "dm_directoryParents.dm_directoryChildren.timezone",
+      "dm_directoryParents.dm_directoryChildren.mainPhone",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -144,6 +157,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     c_servicesfacility,
     c_docToLoc,
     c_affiliations,
+    dm_directoryParents,
   } = document;
 
   return (
@@ -245,6 +259,20 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             <div className="font-bold w-1/5 text-lg">Doctors</div>
             <div className="w-4/5">
               <Carousel data={c_docToLoc} slidesToShow={3} type="doctor" />
+            </div>
+          </div>
+        )}
+        {c_docToLoc && (
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+            <div className="font-bold w-1/5 text-lg">Nearby Facilities</div>
+            <div className="w-4/5">
+              <Carousel
+                data={dm_directoryParents.filter(
+                  (item: any) => item.meta.entityType.id === "ce_city"
+                )}
+                slidesToShow={4}
+                type="facility_nearby"
+              />
             </div>
           </div>
         )}
