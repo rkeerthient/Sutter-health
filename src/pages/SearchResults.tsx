@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SearchBar } from "@yext/search-ui-react";
+import { SearchBar, onSearchFunc } from "@yext/search-ui-react";
 import * as React from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { twMerge } from "tailwind-merge";
@@ -7,7 +7,7 @@ import FacilitiesPage from "../components/Pages/FacilitiesPage";
 import ServicePage from "../components/Pages/ServicesPage";
 import ProfessionalPage from "../components/Pages/ProfessionalPage";
 import UniversalResult from "../components/Pages/UniversalResults";
-import { useSearchActions } from "@yext/search-headless-react";
+import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 
 const SearchResults = () => {
   const searchActions = useSearchActions();
@@ -35,10 +35,8 @@ const SearchResults = () => {
       id: "services",
     },
   ];
-
+  const vert = useSearchState((state) => state.vertical.verticalKey);
   useEffect(() => {
-    console.log(currentPath);
-
     const queryParams = new URLSearchParams(window.location.search);
     currentPath.id !== "all"
       ? queryParams.set("vertical", currentPath.id)
@@ -57,10 +55,25 @@ const SearchResults = () => {
     query && searchActions.setQuery(query);
     searchActions.executeVerticalQuery();
   }, []);
+  const handleSearch: onSearchFunc = (searchEventData) => {
+    const { query } = searchEventData;
+    const queryParams = new URLSearchParams(window.location.search);
+
+    if (query) {
+      queryParams.set("query", query);
+    } else {
+      queryParams.delete("query");
+    }
+    history.pushState(null, "", "?" + queryParams.toString());
+    query && searchActions.setQuery(query);
+    vert
+      ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
+      : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
+  };
   return (
     <>
       <div className=" w-full px-10 ">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className=" bg-white">
           <div className="mx-auto ">
             <div className="h-16 justify-between border-b hidden sm:flex ">

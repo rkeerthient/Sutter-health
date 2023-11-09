@@ -25,6 +25,7 @@ import { Image } from "@yext/pages/components";
 import Address from "../components/Address";
 import Carousel from "../components/Carousel";
 import FormatPhone from "../components/FormatPhone";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -72,9 +73,12 @@ export const config: TemplateConfig = {
       "c_publications",
       "c_rating",
       "c_votes",
+      "acceptingNewPatients",
       "c_speciality",
       "c_credentialsAndNotables",
       "certifications",
+      "c_myHealthOnline",
+      "c_videoVisits",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -164,6 +168,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
     c_credentialsAndNotables,
     certifications,
     name,
+    c_speciality,
+    acceptingNewPatients,
+    c_myHealthOnline,
+    c_videoVisits,
   } = document;
 
   return (
@@ -179,18 +187,44 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
                 alt=""
               />
             )}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-2/4">
               <h1 className="text-4xl font-bold">{name}</h1>
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col">
                   <div>
-                    <FormatPhone phoneNumber={mainPhone}></FormatPhone>
-                  </div>
-                  <div>
                     <Address address={address}></Address>
                   </div>
+                  <div>
+                    <FormatPhone phoneNumber={mainPhone}></FormatPhone>
+                  </div>
                 </div>
-                <div className="text-lg font-bold">{name}</div>
+                <div className="flex flex-col ">
+                  <div className="text-lg font-bold">{c_speciality}</div>{" "}
+                  <div className="flex gap-1 items-center">
+                    {acceptingNewPatients ? (
+                      <CheckIcon className="h-4 w-4 text-[#008080]" />
+                    ) : (
+                      <XMarkIcon className="h-4 w-4 text-red-600" />
+                    )}
+                    <div>Accepting New Patients</div>
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    {c_myHealthOnline ? (
+                      <CheckIcon className="h-4 w-4 text-[#008080]" />
+                    ) : (
+                      <XMarkIcon className="h-4 w-4 text-red-600" />
+                    )}
+                    <div>My Health Online</div>
+                  </div>
+                  <div className="flex gap-1 items-center">
+                    {c_videoVisits ? (
+                      <CheckIcon className="h-4 w-4 text-[#008080]" />
+                    ) : (
+                      <XMarkIcon className="h-4 w-4 text-red-600" />
+                    )}
+                    <div>Video Visits</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -201,12 +235,12 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
               Professional Interests
             </div>
             <div className="flex-1 flex flex-col gap-4">
-              <div className="flex-1 grid grid-cols-4 gap-4">
-                {c_professionalInterest}
+              <div className="flex-1  gap-4">
+                {c_professionalInterest.replace('"', "")}
               </div>
               {c_professionalInterest1 && (
-                <div className="flex-1 grid grid-cols-4 gap-4">
-                  {c_professionalInterest1}
+                <div className="flex-1  gap-4">
+                  {c_professionalInterest1.replace('"', "")}
                 </div>
               )}
             </div>
@@ -216,12 +250,14 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-xl">Affiliations</div>
             <div className="flex-1 flex flex-col gap-4">
-              <div className="text-gray-500 font-bold border-b-2">
+              <div className="text-gray-500 font-bold border-b-2 w-fit">
                 HOSPITAL AFFILIATIONS
               </div>
-              <div className="flex-1 grid grid-cols-4 gap-4">
+              <div className="flex-1 grid grid-cols-3 gap-4">
                 {c_affiliations.map((item, index) => (
-                  <div key={index}>{item}</div>
+                  <div key={index} className="border-t">
+                    {item.replaceAll('"', "")}
+                  </div>
                 ))}
               </div>
             </div>
@@ -240,8 +276,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             <div className="font-bold w-1/5 text-xl">Board Certifications</div>
             <div className="flex-1 flex flex-col gap-4">
               <div className="flex-1 grid grid-cols-4 gap-4">
-                {languages.map((item, index) => (
-                  <div key={index}>{item}</div>
+                {certifications.map((item, index) => (
+                  <div key={index} className="border-t">
+                    {item.replaceAll('"', "")}
+                  </div>
                 ))}
               </div>
             </div>
@@ -254,8 +292,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             </div>
             <div className="flex-1 flex flex-col gap-4">
               <div className="flex-1 grid grid-cols-4 gap-4">
-                {c_credentialsAndNotables.map((item) => (
-                  <div>{item.replace('"', "")}</div>
+                {c_credentialsAndNotables.map((item, index) => (
+                  <div key={index} className="border-t">
+                    {item.replaceAll('"', "")}
+                  </div>
                 ))}
               </div>
             </div>
@@ -268,7 +308,9 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
 
             <div className="flex-1 grid grid-cols-4 gap-4">
               {languages.map((item, index) => (
-                <div key={index}>{item}</div>
+                <div key={index} className="border-t">
+                  {item.replaceAll('"', "")}
+                </div>
               ))}
             </div>
           </div>
