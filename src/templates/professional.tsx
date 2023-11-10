@@ -177,7 +177,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
 
   return (
     <PageLayout>
-      <div className="space-y-8 text-lg">
+      <div className="space-y-12  text-lg">
         <div className="bg-[#f5f5f4] pt-4">
           <PageBreadcrumb
             paths={[
@@ -191,7 +191,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           ></PageBreadcrumb>
         </div>
 
-        <div className="centered-container">
+        <div className="centered-container border-b-2 pb-2">
           <div className="flex flex-row gap-16">
             {headshot ? (
               <Image image={headshot}></Image>
@@ -213,7 +213,11 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
                   </div>
                 </div>
                 <div className="flex flex-col ">
-                  <div className="text-lg font-bold">{c_speciality}</div>{" "}
+                  <div className="text-lg font-bold flex gap-1 flex-col">
+                    {c_speciality.map((item, index) => (
+                      <div key={index}>{item}</div>
+                    ))}
+                  </div>
                   <div className="flex gap-1 items-center">
                     {acceptingNewPatients ? (
                       <CheckIcon className="h-4 w-4 text-[#008080]" />
@@ -244,8 +248,8 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         </div>
         {c_professionalInterest && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
               Professional Interests
             </div>
             <div className="flex-1 flex flex-col gap-4">
@@ -261,12 +265,11 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_affiliations && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Affiliations</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Affiliations
+            </div>
             <div className="flex-1 flex flex-col gap-4">
-              <div className="text-gray-500 font-bold border-b-2 w-fit">
-                HOSPITAL AFFILIATIONS
-              </div>
               <div className="flex-1 grid grid-cols-3 gap-4">
                 {c_affiliations.map((item, index) => (
                   <div key={index} className="border-t">
@@ -278,16 +281,20 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_docToLoc && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Practice Locations</div>
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Practice Locations
+            </div>
             <div className="w-4/5">
               <Carousel data={c_docToLoc} slidesToShow={3} type="facility" />
             </div>
           </div>
         )}
         {certifications && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Board Certifications</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Board Certifications
+            </div>
             <div className="flex-1 flex flex-col gap-4">
               <div className="flex-1 grid grid-cols-4 gap-4">
                 {certifications.map((item, index) => (
@@ -300,8 +307,8 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {certifications && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
               Credentials & Notables
             </div>
             <div className="flex-1 flex flex-col gap-4">
@@ -316,8 +323,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {languages && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Languages</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Languages
+            </div>
 
             <div className="flex-1 grid grid-cols-4 gap-4">
               {languages.map((item, index) => (
@@ -329,8 +338,8 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_additionalInformation && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
               Additional Information
             </div>
             <div className="flex-1 flex flex-col gap-4">
@@ -339,32 +348,40 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_personalInterests && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Personal Interests</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Personal Interests
+            </div>
             <div className="flex-1 flex flex-col gap-4">
               {c_personalInterests}
             </div>
           </div>
         )}
         {c_philosophyOfCare && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Philosophy of Care</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Philosophy of Care
+            </div>
             <div className="flex-1 flex flex-col gap-4">
               {c_philosophyOfCare}
             </div>
           </div>
         )}
         {c_nearByDocs && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Physicians Nearby</div>
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Physicians Nearby
+            </div>
             <div className="w-4/5">
               <Carousel data={c_nearByDocs} slidesToShow={3} type="doctor" />
             </div>
           </div>
         )}
         {c_servicesdoctors && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Related Service Lines</div>
+          <div className=" max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Related Service Lines
+            </div>
             <div className="w-4/5">
               <Carousel
                 data={c_servicesdoctors}
@@ -374,8 +391,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             </div>
           </div>
         )}
-        <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-          <div className="font-bold w-1/5 text-xl">Disclaimer</div>
+        <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+          <div className="font-bold w-1/5 text-2xl text-[#008080]">
+            Disclaimer
+          </div>
           <div className="flex-1 flex flex-col gap-4">
             <div>
               This physician directory is provided as a convenience to you. It

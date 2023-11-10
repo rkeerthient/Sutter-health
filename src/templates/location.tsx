@@ -165,7 +165,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
 
   return (
     <PageLayout>
-      <div className="space-y-8">
+      <div className="space-y-12">
         <div className="bg-[#f5f5f4] pt-4">
           <PageBreadcrumb
             paths={[
@@ -178,7 +178,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             ]}
           ></PageBreadcrumb>
         </div>
-        <div className="centered-container">
+        <div className="centered-container ">
           <div className="flex flex-col gap-8">
             <h1 className="text-4xl font-bold">{name}</h1>
             <div className="grid grid-cols-2 justify-between items-start">
@@ -222,8 +222,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         </div>
         {c_cRichTextDesc && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">About {name}</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              About {name}
+            </div>
             <div className="flex-1">
               <LexicalRichText
                 serializedAST={JSON.stringify(c_cRichTextDesc.json)}
@@ -232,8 +234,8 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {frequentlyAskedQuestions && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
               Frequently Asked Questions
             </div>
             <div className="flex-1 flex flex-col gap-4">
@@ -247,8 +249,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_disabilityServices && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">Disability Services</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Disability Services
+            </div>
             <div className="flex-1">
               <LexicalRichText
                 serializedAST={JSON.stringify(c_disabilityServices.json)}
@@ -257,8 +261,10 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_servicesfacility && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">Services Offered</div>
+          <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Services Offered
+            </div>
             <div className="w-4/5">
               <Carousel
                 data={c_servicesfacility}
@@ -269,27 +275,29 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {c_docToLoc && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">Doctors</div>
+          <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Doctors
+            </div>
             <div className="w-4/5">
               <Carousel data={c_docToLoc} slidesToShow={3} type="doctor" />
             </div>
           </div>
         )}
-        {c_docToLoc && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">Nearby Facilities</div>
-            <div className="w-4/5">
-              <Carousel
-                data={dm_directoryParents.filter(
-                  (item: any) => item.meta.entityType.id === "ce_city"
-                )}
-                slidesToShow={4}
-                type="facility_nearby"
-              />
-            </div>
+        <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+          <div className="font-bold w-1/5 text-2xl text-[#008080]">
+            Nearby Facilities
           </div>
-        )}
+          <div className="w-4/5">
+            <Carousel
+              data={dm_directoryParents.filter(
+                (item: any) => item.meta.entityType.id === "ce_city"
+              )}
+              slidesToShow={4}
+              type="facility_nearby"
+            />
+          </div>
+        </div>
       </div>
     </PageLayout>
   );

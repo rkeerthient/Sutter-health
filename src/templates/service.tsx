@@ -133,7 +133,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
 
   return (
     <PageLayout>
-      <div className="space-y-8 text-lg">
+      <div className="space-y-12 text-lg">
         <div className="bg-[#f5f5f4] pt-4">
           <PageBreadcrumb
             paths={[
@@ -146,7 +146,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
             ]}
           ></PageBreadcrumb>
         </div>
-        <div className="centered-container  flex flex-row gap-16">
+        <div className="centered-container  flex flex-row gap-16 border-b-2 pb-2">
           <div className="flex flex-col gap-4 w-1/2">
             <h1 className="text-4xl font-bold">{name}</h1>
             {shortDescriptionV2 && (
@@ -160,8 +160,10 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
           <div>{c_imageUrl && <img src={c_imageUrl}></img>}</div>
         </div>
         {c_servicesservices && (
-          <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">Featured Services</div>
+          <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">
+              Featured Services
+            </div>
             <div className="w-4/5">
               <Carousel
                 data={c_servicesservices}
@@ -172,8 +174,8 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
           </div>
         )}
         {richTextDescriptionV2 && (
-          <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-xl">About</div>
+          <div className=" max-w-screen-2xl mx-auto flex gap-6 centered-container">
+            <div className="font-bold w-1/5 text-2xl text-[#008080]">About</div>
             <div className="flex-1 flex flex-col gap-4">
               <LexicalRichText
                 serializedAST={
@@ -186,15 +188,17 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
         )}
       </div>
       {c_servicesdoctors && (
-        <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-          <div className="font-bold w-1/5 text-xl">Doctor Profiles</div>
+        <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
+          <div className="font-bold w-1/5 text-2xl text-[#008080]">
+            Doctor Profiles
+          </div>
           <div className="w-4/5">
             <Carousel data={c_servicesdoctors} slidesToShow={4} type="doctor" />
           </div>
         </div>
       )}
       {c_servicesfacility && (
-        <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
+        <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
           <div className="font-bold w-1/5 text-lg">Services Near You</div>
           <div className="w-4/5">
             <Carousel

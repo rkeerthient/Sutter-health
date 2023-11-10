@@ -10,7 +10,10 @@ import StaticMap from "./static-map";
 const Carousel = (props: any) => {
   let { data, type } = props;
 
-  data = type === "facility_nearby" ? data[0]?.dm_directoryChildren : data;
+  data =
+    type === "facility_nearby" && data[0].dm_directoryChildren
+      ? data[0].dm_directoryChildren
+      : data;
 
   const settings = {
     infinite: false,
@@ -51,10 +54,8 @@ const Carousel = (props: any) => {
     <Slider {...settings}>
       {data &&
         data.map((item: any, index: any) => {
-          type === "service" && console.log("Hi");
-
           return type === "doctor" ? (
-            <div key={index} className="p-4 font-normal border">
+            <div key={index} className="p-4 font-normal ">
               {item.headshot ? (
                 <div className="w-20 h-20 overflow-hidden rounded-full">
                   <Image
@@ -95,7 +96,7 @@ const Carousel = (props: any) => {
               ) : (
                 <img
                   src="https://dummyimage.com/640x360/fff/aaa"
-                  className="h-[172px] w-[168px] border mb-4"
+                  className="h-[220px] w-[215px] border mb-4"
                   alt={`${item.name} default image`}
                 />
               )}
@@ -141,7 +142,7 @@ const Carousel = (props: any) => {
                   alt={`${item.name} default image`}
                 />
               )}
-              <div className="mt-4 text-[#008080] font-bold text-xs">
+              <div className="mt-4 text-[#008080] font-bold ">
                 <a
                   key={index}
                   href={`/${item.slug}`}
