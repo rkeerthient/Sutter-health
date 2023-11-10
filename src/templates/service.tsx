@@ -130,7 +130,6 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
     c_servicesdoctors,
     c_servicesservices,
   } = document;
-  console.log(c_servicesservices);
 
   return (
     <PageLayout>
@@ -188,7 +187,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
       </div>
       {c_servicesdoctors && (
         <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-          <div className="font-bold w-1/5 text-xl">Related Service Lines</div>
+          <div className="font-bold w-1/5 text-xl">Doctor Profiles</div>
           <div className="w-4/5">
             <Carousel data={c_servicesdoctors} slidesToShow={4} type="doctor" />
           </div>
@@ -201,7 +200,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
             <Carousel
               data={c_servicesfacility}
               slidesToShow={4}
-              type="facility"
+              type="facility_nearby"
             />
           </div>
         </div>

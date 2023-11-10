@@ -16,7 +16,6 @@ const PageBreadcrumb = ({ paths }: BreadcrumbsProps) => {
       <div className="flex space-x-2 items-center border-b-8 border-[#008080] pb-2">
         {paths.map((path, index) => {
           const { label, url } = path;
-          console.log(url);
 
           return (
             <span key={index} className="flex items-center font-semibold">

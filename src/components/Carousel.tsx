@@ -9,13 +9,13 @@ import StaticMap from "./static-map";
 
 const Carousel = (props: any) => {
   let { data, type } = props;
-  console.log(JSON.stringify(data), type);
-  data = (type = "facility_nearby") ? data[0].dm_directoryChildren : data;
+
+  data = type === "facility_nearby" ? data[0]?.dm_directoryChildren : data;
+
   const settings = {
-    dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: props.slidesToShow,
+    slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
 
@@ -46,25 +46,29 @@ const Carousel = (props: any) => {
       },
     ],
   };
+
   return (
     <Slider {...settings}>
       {data &&
         data.map((item: any, index: any) => {
+          type === "service" && console.log("Hi");
+
           return type === "doctor" ? (
             <div key={index} className="p-4 font-normal border">
               {item.headshot ? (
-                <div className="w-20 h-20 overflow-hidden rounded-full    ">
+                <div className="w-20 h-20 overflow-hidden rounded-full">
                   <Image
                     image={item.headshot}
-                    className="  max-w-full h-auto align-middle flex-shrink-0 rounded-full"
-                  ></Image>
+                    className="max-w-full h-auto align-middle flex-shrink-0 rounded-full"
+                    alt={`${item.name} headshot`}
+                  />
                 </div>
               ) : (
-                <div className="w-20 h-20 overflow-hidden rounded-full    ">
+                <div className="w-20 h-20 overflow-hidden rounded-full">
                   <img
                     src="https://www.sutterhealth.org/assets/img/dr-profiles/default-dr-profile.png"
-                    alt=""
-                    className=" max-w-full h-auto align-middle flex-shrink-0 rounded-full"
+                    alt={`${item.name} default headshot`}
+                    className="max-w-full h-auto align-middle flex-shrink-0 rounded-full"
                   />
                 </div>
               )}
@@ -75,20 +79,24 @@ const Carousel = (props: any) => {
               >
                 {item.name}
               </a>
-              <div className="">{item.c_speciality}</div>
+              {item.c_speciality && <div>{item.c_speciality.join(", ")}</div>}
             </div>
           ) : type === "facility_nearby" ? (
             <div
               key={index}
-              className="p-4    flex-col flex justify-between gap-4 leading-6 font-normal"
+              className="p-4 flex-col flex justify-between gap-4 leading-6 font-normal"
             >
               {item.photoGallery ? (
-                <Image image={item.photoGallery[0]} className="!mb-4"></Image>
+                <Image
+                  image={item.photoGallery[0]}
+                  className="!mb-4"
+                  alt={`${item.name} gallery`}
+                />
               ) : (
                 <img
                   src="https://dummyimage.com/640x360/fff/aaa"
                   className="h-[172px] w-[168px] border mb-4"
-                  alt=""
+                  alt={`${item.name} default image`}
                 />
               )}
               <a
@@ -119,45 +127,21 @@ const Carousel = (props: any) => {
                 <Address address={item.address} />
               </div>
             </div>
-          ) : type === "service" ? (
-            <div
-              key={index}
-              className="p-4 flex-col flex justify-between leading-6 font-normal"
-            >
-              {item.c_imageUrl ? (
-                <img src={item.c_imageUrl}></img>
-              ) : (
-                <img
-                  className="object-fit object-center max-w-[584px] w-full border"
-                  src="https://dummyimage.com/640x360/fff/aaa"
-                  alt=""
-                />
-              )}
-              <div className=" mt-4 text-[#008080] font-bold text-xs">
-                <a
-                  key={index}
-                  href={`/${item.slug}`}
-                  className="text-[#008080] my-2 font-bold"
-                >
-                  {item.name}
-                </a>
-              </div>
-            </div>
           ) : (
             <div
               key={index}
               className="p-4 flex-col flex justify-between leading-6 font-normal"
             >
               {item.c_imageUrl ? (
-                <img src={item.c_imageUrl}></img>
+                <img src={item.c_imageUrl} alt={`${item.name} image`} />
               ) : (
                 <img
                   className="object-fit object-center max-w-[584px] w-full border"
                   src="https://dummyimage.com/640x360/fff/aaa"
-                  alt=""
+                  alt={`${item.name} default image`}
                 />
               )}
-              <div className=" mt-4 text-[#008080] font-bold text-xs">
+              <div className="mt-4 text-[#008080] font-bold text-xs">
                 <a
                   key={index}
                   href={`/${item.slug}`}
