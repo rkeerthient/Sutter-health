@@ -23,6 +23,7 @@ import PageLayout from "../components/page-layout";
 import "../index.css";
 import Carousel from "../components/Carousel";
 import { LexicalRichText } from "@yext/react-components";
+import PageBreadcrumb from "../components/pageBreadcrumb";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -129,10 +130,23 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
     c_servicesdoctors,
     c_servicesservices,
   } = document;
+  console.log(c_servicesservices);
 
   return (
     <PageLayout>
       <div className="space-y-8 text-lg">
+        <div className="bg-[#f5f5f4] pt-4">
+          <PageBreadcrumb
+            paths={[
+              { label: "Home", url: "/" },
+              {
+                label: "Find a service",
+                url: "search.html?vertical=services",
+              },
+              { label: name, url: "" },
+            ]}
+          ></PageBreadcrumb>
+        </div>
         <div className="centered-container  flex flex-row gap-16">
           <div className="flex flex-col gap-4 w-1/2">
             <h1 className="text-4xl font-bold">{name}</h1>
@@ -148,7 +162,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
         </div>
         {c_servicesservices && (
           <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
-            <div className="font-bold w-1/5 text-lg">Featured Services</div>
+            <div className="font-bold w-1/5 text-xl">Featured Services</div>
             <div className="w-4/5">
               <Carousel
                 data={c_servicesservices}

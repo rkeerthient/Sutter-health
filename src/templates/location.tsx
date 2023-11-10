@@ -27,6 +27,7 @@ import Address from "../components/Address";
 import FormatPhone from "../components/FormatPhone";
 import { LexicalRichText } from "@yext/react-components";
 import Carousel from "../components/Carousel";
+import PageBreadcrumb from "../components/pageBreadcrumb";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -62,10 +63,12 @@ export const config: TemplateConfig = {
       "dm_directoryParents.meta",
       "dm_directoryParents.name",
       "dm_directoryParents.slug",
+      "dm_directoryParents.photoGallery",
       "dm_directoryParents.yextDisplayCoordinate.latitude",
       "dm_directoryParents.yextDisplayCoordinate.longitude",
       "dm_directoryParents.dm_directoryChildren.yextDisplayCoordinate.latitude",
       "dm_directoryParents.dm_directoryChildren.yextDisplayCoordinate.longitude",
+      "dm_directoryParents.dm_directoryChildren.photoGallery",
       "dm_directoryParents.dm_directoryChildren.name",
       "dm_directoryParents.dm_directoryChildren.address",
       "dm_directoryParents.dm_directoryChildren.hours",
@@ -163,6 +166,18 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
   return (
     <PageLayout>
       <div className="space-y-8">
+        <div className="bg-[#f5f5f4] pt-4">
+          <PageBreadcrumb
+            paths={[
+              { label: "Home", url: "/" },
+              {
+                label: "Find a Locations",
+                url: "search.html?vertical=healthcare_facilities",
+              },
+              { label: name, url: "" },
+            ]}
+          ></PageBreadcrumb>
+        </div>
         <div className="centered-container">
           <div className="flex flex-col gap-8">
             <h1 className="text-4xl font-bold">{name}</h1>
@@ -171,7 +186,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
                 {photoGallery && <Image image={photoGallery[0]}></Image>}
                 <div className="flex flex-col gap-5">
                   <Address address={address}></Address>
-                  <div className="text-[#008080] hover:cursor-pointer">
+                  <div className=" hover:cursor-pointer">
                     <FormatPhone phoneNumber={mainPhone}></FormatPhone>
                   </div>
                   <a
@@ -241,7 +256,6 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             </div>
           </div>
         )}
-
         {c_servicesfacility && (
           <div className=" max-w-screen-2xl mx-auto w-full flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-lg">Services Offered</div>

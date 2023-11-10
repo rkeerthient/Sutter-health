@@ -26,6 +26,7 @@ import Address from "../components/Address";
 import Carousel from "../components/Carousel";
 import FormatPhone from "../components/FormatPhone";
 import { CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import PageBreadcrumb from "../components/pageBreadcrumb";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -177,6 +178,19 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
   return (
     <PageLayout>
       <div className="space-y-8 text-lg">
+        <div className="bg-[#f5f5f4] pt-4">
+          <PageBreadcrumb
+            paths={[
+              { label: "Home", url: "/" },
+              {
+                label: "Find a doctor",
+                url: "search.html?vertical=healthcare_professionals",
+              },
+              { label: name, url: "" },
+            ]}
+          ></PageBreadcrumb>
+        </div>
+
         <div className="centered-container">
           <div className="flex flex-row gap-16">
             {headshot ? (
@@ -301,7 +315,6 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
             </div>
           </div>
         )}
-
         {languages && (
           <div className=" max-w-screen-2xl mx-auto flex gap-8 centered-container">
             <div className="font-bold w-1/5 text-xl">Languages</div>

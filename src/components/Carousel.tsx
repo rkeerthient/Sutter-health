@@ -9,7 +9,7 @@ import StaticMap from "./static-map";
 
 const Carousel = (props: any) => {
   let { data, type } = props;
-  console.log(JSON.stringify(data[0].dm_directoryChildren));
+  console.log(JSON.stringify(data), type);
   data = (type = "facility_nearby") ? data[0].dm_directoryChildren : data;
   const settings = {
     dots: true,
@@ -80,22 +80,24 @@ const Carousel = (props: any) => {
           ) : type === "facility_nearby" ? (
             <div
               key={index}
-              className="p-4 flex-col flex justify-between leading-6 font-normal"
+              className="p-4    flex-col flex justify-between gap-4 leading-6 font-normal"
             >
-              <StaticMap
-                latitude={item.yextDisplayCoordinate.latitude}
-                longitude={item.yextDisplayCoordinate.longitude}
-              ></StaticMap>
+              {item.photoGallery ? (
+                <Image image={item.photoGallery[0]} className="!mb-4"></Image>
+              ) : (
+                <img
+                  src="https://dummyimage.com/640x360/fff/aaa"
+                  className="h-[172px] w-[168px] border mb-4"
+                  alt=""
+                />
+              )}
               <a
                 key={index}
                 href={`/${item.slug}`}
-                className="text-[#008080] my-2 font-bold"
+                className="text-[#008080] font-bold"
               >
                 {item.name}
               </a>
-              <div>
-                <Address address={item.address} />
-              </div>
             </div>
           ) : type === "facility" ? (
             <div
@@ -115,6 +117,30 @@ const Carousel = (props: any) => {
               </a>
               <div>
                 <Address address={item.address} />
+              </div>
+            </div>
+          ) : type === "service" ? (
+            <div
+              key={index}
+              className="p-4 flex-col flex justify-between leading-6 font-normal"
+            >
+              {item.c_imageUrl ? (
+                <img src={item.c_imageUrl}></img>
+              ) : (
+                <img
+                  className="object-fit object-center max-w-[584px] w-full border"
+                  src="https://dummyimage.com/640x360/fff/aaa"
+                  alt=""
+                />
+              )}
+              <div className=" mt-4 text-[#008080] font-bold text-xs">
+                <a
+                  key={index}
+                  href={`/${item.slug}`}
+                  className="text-[#008080] my-2 font-bold"
+                >
+                  {item.name}
+                </a>
               </div>
             </div>
           ) : (
