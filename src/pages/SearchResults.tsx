@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { SearchBar, onSearchFunc } from "@yext/search-ui-react";
 import * as React from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -44,7 +44,7 @@ const SearchResults = () => {
     history.pushState(null, "", "?" + queryParams.toString());
   }, [currentPath]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
     const verticalKey = new URLSearchParams(window.location.search).get(
