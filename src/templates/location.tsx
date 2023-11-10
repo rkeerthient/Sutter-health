@@ -172,7 +172,7 @@ const Location: Template<TemplateRenderProps> = ({ document }) => {
               { label: "Home", url: "/" },
               {
                 label: "Find a Locations",
-                url: "search.html?vertical=healthcare_facilities",
+                url: "/search.html?vertical=healthcare_facilities",
               },
               { label: name, url: "" },
             ]}

@@ -95,9 +95,9 @@ const Home = ({ document }: TemplateRenderProps) => {
                   the right care effortlessly with "Get the Right Care for You.
                   healthcare provider.
                 </p>
-                <Button color="primary" href="/guided-doctor-finder">
-                  Get Started
-                </Button>
+                <button className="w-fit uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border">
+                  Get started
+                </button>
               </div>
             </div>
           </div>
@@ -123,7 +123,9 @@ const Home = ({ document }: TemplateRenderProps) => {
                   in over 800 locations nationwide.
                 </div>
                 {/* <Button color="primary" href={c_locationHero.cta.link}> */}
-                <Button color="primary">Find a location</Button>
+                <button className="w-fit uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border">
+                  Get started
+                </button>{" "}
               </div>
               <div className="p-10 flex-col justify-center items-center gap-2.5 inline-flex">
                 <img
@@ -159,9 +161,9 @@ const Home = ({ document }: TemplateRenderProps) => {
                   your health journey effortlessly with "Dedicated Healthcare
                   When You Need It."
                 </p>
-                <Button color="primary" href="/guided-doctor-finder">
-                  Get Started
-                </Button>
+                <button className="w-fit uppercase text-white hover:text-white bg-[#008080] hover:bg-[#066] hover:cursor-pointer font-bold text-center rounded-sm px-4 py-2 border">
+                  Get started
+                </button>
               </div>
             </div>
           </div>
@@ -173,7 +175,7 @@ const Home = ({ document }: TemplateRenderProps) => {
               {document.c_homeToServices.map((item, index) => (
                 <a
                   key={index}
-                  className="bg-white h-[80px] border px-6  text-xl items-center flex justify-start shadow-md hover:border-[#008080]"
+                  className="bg-white h-[80px] border px-8 py-2 mt-4 text-xl items-center flex justify-start shadow-md hover:border-[#008080]"
                   href={`/${item.slug}`}
                 >
                   {item.name}

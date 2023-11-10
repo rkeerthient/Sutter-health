@@ -140,7 +140,7 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
               { label: "Home", url: "/" },
               {
                 label: "Find a service",
-                url: "search.html?vertical=services",
+                url: "/search.html?vertical=services",
               },
               { label: name, url: "" },
             ]}
@@ -199,7 +199,9 @@ const Service: Template<TemplateRenderProps> = ({ document }) => {
       )}
       {c_servicesfacility && (
         <div className="my-4 max-w-screen-2xl mx-auto w-full flex gap-6 centered-container">
-          <div className="font-bold w-1/5 text-lg">Services Near You</div>
+          <div className="font-bold w-1/5 text-2xl text-[#008080]">
+            Services Near You
+          </div>
           <div className="w-4/5">
             <Carousel
               data={c_servicesfacility}

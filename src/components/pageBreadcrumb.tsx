@@ -21,7 +21,7 @@ const PageBreadcrumb = ({ paths }: BreadcrumbsProps) => {
             <span key={index} className="flex items-center font-semibold">
               {url ? (
                 <a
-                  href={`/${url}`}
+                  href={`${url}`}
                   className="  text-[#008080] hover:underline hover:underline-offset-4"
                 >
                   {label != "Home" ? label : <HiHome className="w-5 h-5 " />}
