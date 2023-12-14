@@ -63,7 +63,7 @@ const SearchResults = () => {
         searchActions.executeVerticalQuery())
       : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
   }, []);
-
+  /*rtest*/
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
